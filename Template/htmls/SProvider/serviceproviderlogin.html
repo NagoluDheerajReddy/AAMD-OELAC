@@ -1,0 +1,130 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<title>Login</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<head>
+
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+
+
+
+		<style>
+			body {
+                background: url("{% static 'Banner.png' %}");
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+            .container-fluid {
+                padding: 50px;
+                width: 100%;
+                max-width: 1200px;
+            }
+            .container {
+                background-color: white;
+                padding: 50px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+            #title {
+                font-family: 'Times New Roman', Times, serif;
+                color: #000000;
+            }
+            .text-uppercase {
+                font-family: 'Righteous', cursive;
+            }
+            .form-group {
+                margin-bottom: 15px;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            .btn {
+                margin: 10px auto;
+                display: block;
+                min-width: 200px;
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 20px;
+            }
+            .style2 {
+                color: #000000;
+                font-weight: bold;
+                margin: 20px 0;
+            }
+		.style1 {
+	color: #000000;
+	font-weight: bold;
+}
+        .style2 {
+	font-family: 'Righteous', cursive;
+	color: #000000;
+	font-weight: bold;
+}
+        </style>
+	</head>
+	<body>
+	<div class="container-fluid">
+		<div class="container">
+			<h2 class="text-center style1" id="title">Automated Android Malware Detection Using Optimal Ensemble Learning Approach for Cybersecurity</h2>
+			<p class="text-center">
+				<span class="style1"><small id="passwordHelpInline" class="text-muted">Cybersecurity, malware detection, ensemble learning, hunter prey optimization, machine learning.</small></span>
+			</p>
+			<hr>
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<form method="POST" role="form" class="login-form">
+						{% csrf_token %}
+						<fieldset>
+							{% load static %}
+							<img src="{% static '/icon.png' %}" alt="My image" class="img-fluid mb-0" style="max-width: 120px; height: auto;">
+							<p class="style2">Login Service Provider:</p>
+							<div class="form-group">
+								<input type="text" name="username" placeholder="User Name" required>
+							</div>
+							<div class="form-group">
+								<input type="password" name="password" placeholder="Password" required>
+							</div>
+							<div class="form-group">
+								<input type="submit" name="submit1" class="btn btn-primary" value="Login">
+							</div>
+							<div class="form-group">
+								<button class="btn btn-lg btn-outline-primary"><a href="{% url 'login' %}">User Login</a></button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	</body>
+
+
+</html>

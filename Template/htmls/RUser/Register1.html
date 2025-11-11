@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Register Your Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: url("{% static 'Banner.png' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .solid-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            margin-top: 30px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        .btn-custom {
+            background-color: #007BFF;
+            color: #fff;
+            width: 100%;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        .section-heading {
+            color: #333;
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .subtext {
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .register-link a {
+            color: #007BFF;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="solid-container mx-auto col-md-10">
+        <h2 class="section-heading">Automated Android Malware Detection Using Optimal Ensemble Learning</h2>
+        <p class="subtext">Cybersecurity, malware detection, ensemble learning, hunter prey optimization, machine learning.</p>
+
+        <div class="row">
+            <div class="col-md-5 image-container">
+                <img src="{% static '/Register.jpg' %}" alt="Register">
+                <h5 class="text-center text-dark">REGISTER YOUR DETAILS HERE !!!</h5>
+            </div>
+            <div class="col-md-7">
+                <form method="POST" role="form">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="User Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea name="address" class="form-control" placeholder="Enter Address" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select name="gender" class="form-control" required>
+                            <option value="">-- Select Gender --</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" name="phoneno" class="form-control" placeholder="Enter Mobile Number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" name="country" class="form-control" placeholder="Enter Country Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="text" name="state" class="form-control" placeholder="Enter State Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" name="city" class="form-control" placeholder="Enter City Name" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-custom mt-3">Register</button>
+                </form>
+
+                <div class="mt-4 text-dark">
+                    <strong>Registered Status:</strong> {{ object }}
+                </div>
+
+                <div class="text-center register-link mt-3">
+                    <a href="{% url 'login' %}">Remote User</a> | 
+                    <a href="{% url 'serviceproviderlogin' %}">Service Provider</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

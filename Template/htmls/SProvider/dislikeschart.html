@@ -1,0 +1,122 @@
+{% extends 'SProvider/design1.html' %}
+{% block researchblock %}
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    background-color: #f0f2f5;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dashboard {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    width: 250px;
+    background-color: #1e1e2f;
+    color: #fff;
+    padding: 40px 20px;
+  }
+
+  .sidebar h3 {
+    margin: 30px 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .sidebar a {
+    display: block;
+    color: #90caf9;
+    text-decoration: none;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar a:hover {
+    color: #ffffff;
+  }
+
+  .content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chart-card {
+    width: 100%;
+    max-width: 900px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+  }
+
+  .chart-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  #chartContainer {
+    height: 500px;
+    width: 100%;
+  }
+</style>
+
+<div class="dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Chart Options</h3>
+    <a href="{% url 'dislikeschart' 'pie' %}">Pie Chart</a>
+    <a href="{% url 'dislikeschart' 'bar' %}">Bar Chart</a>
+    <a href="{% url 'dislikeschart' 'spline' %}">Spline Chart</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="chart-card">
+      <h2>Dislike Chart Overview</h2>
+      <div id="chartContainer"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      title: {
+        text: ""
+      },
+      data: [{
+        {% if dislike_chart == "bar" %}
+        type: "bar",
+        {% elif dislike_chart == "pie" %}
+        type: "pie",
+        {% elif dislike_chart == "spline" %}
+        type: "spline",
+        {% endif %}
+        startAngle: 240,
+        yValueFormatString: "##0.00\"%\"",
+        indexLabel: "{label} {y}",
+        dataPoints: [
+          {% for o in form %}
+            { y: {{ o.dcount }}, label: "{{ o.names }}" },
+          {% endfor %}
+        ]
+      }]
+    });
+    chart.render();
+  };
+</script>
+
+{% endblock %}

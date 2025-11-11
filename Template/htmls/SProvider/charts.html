@@ -1,0 +1,132 @@
+{% extends 'SProvider/design1.html' %}
+{% block researchblock %}
+
+<style>
+    :root {
+        --primary-color: #4a90e2;
+        --secondary-color: #2c3e50;
+        --background-color: #f5f7fa;
+        --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        background-color: var(--background-color);
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 16px;
+        padding: 16px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .sidemenu {
+        background: white;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: var(--card-shadow);
+        position: sticky;
+        top: 16px;
+        height: fit-content;
+    }
+
+    .sidemenu h3 {
+        color: var(--secondary-color);
+        margin-bottom: 16px;
+        font-size: 1rem;
+    }
+
+    .chart-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .chart-links a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        background: var(--background-color);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .chart-links a:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    #chartContainer {
+        background: white;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: var(--card-shadow);
+        min-height: 400px;
+    }
+
+    .canvasjs-chart-credit {
+        display: none;
+    }
+</style>
+
+<script>
+window.onload = function() {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        backgroundColor: "transparent",
+        title: {
+            text: "Analytics Dashboard",
+            fontFamily: "Segoe UI",
+            fontSize: 18,
+            fontWeight: "normal",
+            padding: 12
+        },
+        data: [{
+        {% if chart_type == "line" %}
+            type: "line",
+            lineThickness: 2,
+            markerSize: 6,
+        {% elif chart_type == "pie" %}
+            type: "pie",
+            startAngle: 240,
+        {% elif chart_type == "spline" %}
+            type: "spline",
+            lineThickness: 2,
+            markerSize: 6,
+        {% endif %}
+            yValueFormatString: "##0.00\"%\"",
+            indexLabel: "{label} {y}",
+            indexLabelFontSize: 12,
+            dataPoints: [
+            {% for o in form %}
+                {y: {{o.dcount}}, label: "{{o.names}}"},
+            {% endfor %}
+            ]
+        }]
+    });
+    chart.render();
+}
+</script>
+
+<div class="dashboard-container">
+    <div class="sidemenu">
+        <h3>Chart Types</h3>
+        <div class="chart-links">
+            <a href="{% url 'charts' 'pie' %}">Pie Chart</a>
+            <a href="{% url 'charts' 'line' %}">Line Chart</a>
+            <a href="{% url 'charts' 'spline' %}">Spline Chart</a>
+        </div>
+    </div>
+    <div id="chartContainer"></div>
+</div>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+{% endblock %}
